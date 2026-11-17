@@ -1,0 +1,33 @@
+# Tests and builds Sanscribe on Windows for every push and pull request.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            core -> target
+            src-tauri -> target
+
+      - name: Engine tests
+        run: cargo test --manifest-path core/Cargo.toml
+
+      - name: Clippy
+        run: cargo clippy --manifest-path src-tauri/Cargo.toml -- -D warnings
+
+      - name: Build (debug)
+        run: cargo build --manifest-path src-tauri/Cargo.toml

@@ -1,0 +1,10 @@
+[package]
+name = "sanscribe-core"
+version = "0.1.0"
+edition = "2021"
+description = "Devanagari <-> IAST / ISO 15919 transliteration engine used by Sanscribe"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+unicode-normalization = "0.1"

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanscribe – Settings</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="icon.png" alt="" class="logo" />
+    <div>
+      <h1>Sanscribe</h1>
+      <p class="sub">Select text in any application and press a hotkey.</p>
+    </div>
+    <span id="version" class="version"></span>
+  </header>
+
+  <main>
+    <section>
+      <h2>Hotkeys</h2>
+      <div class="row">
+        <label for="hotkeyToggle">Toggle script<small>Devanagari ⇄ Latin, replaces the selection</small></label>
+        <input id="hotkeyToggle" class="hotkey" readonly />
+      </div>
+      <div class="row">
+        <label for="hotkeyAlongside">Insert alongside<small>Keeps the original and adds the transliteration</small></label>
+        <input id="hotkeyAlongside" class="hotkey" readonly />
+      </div>
+      <div class="row">
+        <label for="templatePreset">Alongside format</label>
+        <div class="stack">
+          <select id="templatePreset">
+            <option value="{original} ({result})">संस्कृतम् (saṃskṛtam)</option>
+            <option value="{original} [{result}]">संस्कृतम् [saṃskṛtam]</option>
+            <option value="{original} / {result}">संस्कृतम् / saṃskṛtam</option>
+            <option value="{original} – {result}">संस्कृतम् – saṃskṛtam</option>
+            <option value="{original}&#10;{result}">संस्कृतम् ↵ saṃskṛtam (new line)</option>
+            <option value="custom">Custom…</option>
+          </select>
+          <input id="template" class="hidden" placeholder="{original} ({result})" />
+        </div>
+      </div>
+      <p class="hint">Click a hotkey field and press the new combination. Ctrl+Alt combinations can clash with AltGr characters (@, €, {) on German keyboards — adding Shift avoids that.</p>
+    </section>
+
+    <section>
+      <h2>Transliteration</h2>
+      <div class="row">
+        <span class="label">Standard</span>
+        <div class="segmented">
+          <label><input type="radio" name="scheme" value="iast" /> IAST</label>
+          <label><input type="radio" name="scheme" value="iso15919" /> ISO 15919</label>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="nukta" /> Nukta letters (Hindi/Urdu): क़ ख़ ग़ ज़ ड़ ढ़ फ़ → q k͟h ġ z ṛ ṛh f</label>
+      <label class="check"><input type="checkbox" id="convertDigits" /> Convert digits (१२३ ⇄ 123)</label>
+
+      <div class="try">
+        <label for="tryInput">Try it</label>
+        <textarea id="tryInput" rows="2">धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः ।</textarea>
+        <div class="out"><span>Toggle</span><output id="tryToggle"></output></div>
+        <div class="out"><span>Alongside</span><output id="tryAlongside"></output></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Behaviour</h2>
+      <label class="check"><input type="checkbox" id="readSelectionViaUiAutomation" /> Read the selection directly (UI Automation) where the app supports it, without using the clipboard</label>
+      <label class="check"><input type="checkbox" id="reselectAfterReplace" /> Keep the result selected, so pressing the toggle hotkey again converts it back</label>
+      <label class="check"><input type="checkbox" id="restoreClipboard" /> Restore my clipboard afterwards</label>
+      <div class="row">
+        <label for="outputMethod">Insert the result by</label>
+        <select id="outputMethod">
+          <option value="paste">Pasting (recommended)</option>
+          <option value="type">Typing it (no clipboard, but AutoCorrect may change it)</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <h2>System</h2>
+      <label class="check"><input type="checkbox" id="launchAtLogin" /> Start Sanscribe when I sign in to Windows</label>
+      <label class="check"><input type="checkbox" id="checkForUpdates" /> Check for updates at startup</label>
+      <button id="checkNow" class="link">Check for updates now</button>
+    </section>
+  </main>
+
+  <footer>
+    <span id="status" role="status"></span>
+    <button id="reset" class="secondary">Defaults</button>
+    <button id="save" class="primary">Save</button>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
