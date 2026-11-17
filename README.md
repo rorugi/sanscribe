@@ -1,99 +1,94 @@
 # Sanscribe
 
-Select Sanskrit text in any Windows application, press a hotkey, and it is
-transliterated in place. Runs fully offline, lives in the system tray.
+[![Latest release](https://img.shields.io/github/v/release/rorugi/sanscribe?label=latest%20version)](https://github.com/rorugi/sanscribe/releases/latest)
 
-| Hotkey (default)     | Action |
-| -------------------- | ------ |
-| `Ctrl+Shift+Alt+T`   | **Toggle**: संस्कृतम् → saṃskṛtam → संस्कृतम् (the result stays selected, so you can press again) |
-| `Ctrl+Shift+Alt+A`   | **Insert alongside**: संस्कृतम् → संस्कृतम् (saṃskṛtam). Works from Latin too. Pressing again on the result does nothing. |
+**Transliterate Sanskrit in any Windows application.** Select Devanagari text, press a
+hotkey, and it becomes IAST. Press it again and it's Devanagari again. Works in Word, Outlook,
+your browser, Notepad and most other programs. It runs completely offline.
 
-Both hotkeys and the alongside format can be changed in the settings window
-(left-click the tray icon).
+संस्कृतम् ⇄ saṃskṛtam
+
+## Download
+
+### [⬇ Download the latest version](https://github.com/rorugi/sanscribe/releases/latest)
+
+On that page, under **Assets**, download **`Sanscribe_…_x64-setup.exe`**.
+Requires Windows 10 or 11 (64-bit). Free.
+
+## Installation
+
+1. Run the downloaded setup file. You don't need administrator rights.
+2. If Windows shows **"Windows protected your PC"**, click **More info → Run anyway**.
+   This appears because the installer isn't signed with a paid Microsoft certificate.
+3. Sanscribe starts and its icon <img src="src-tauri/icons/32x32.png" width="16" alt=""> appears in
+   the system tray, at the bottom right of the taskbar (possibly hidden under the **^** arrow).
+   The first time, the settings window opens so you can check the hotkeys.
+
+Sanscribe starts automatically when you sign in to Windows. You can turn that off in the settings.
+
+## How to use
+
+1. **Select** the text you want to convert.
+2. Press a **hotkey**:
+
+| Hotkey | What it does | Example |
+| --- | --- | --- |
+| **Ctrl + Shift + Alt + T** | **Toggle**: replaces the selection with the other script. The result stays selected, so pressing again converts it back. | संस्कृतम् → saṃskṛtam → संस्कृतम् |
+| **Ctrl + Shift + Alt + A** | **Insert alongside**: keeps the original and adds the transliteration. | संस्कृतम् → संस्कृतम् (saṃskṛtam) |
+
+Both work in either direction (Devanagari → Latin and Latin → Devanagari). If the selection
+contains any Devanagari, the Devanagari is converted and other text is left as it is.
+
+You can change both hotkeys in the settings.
 
 ## Settings
 
-- **Standard**: IAST (ṃ, ṛ, e, o) or ISO 15919 (ṁ, r̥, ē, ō)
-- **Nukta letters** (for Hindi): क़ ख़ ग़ ज़ ड़ ढ़ फ़ य़ → q k͟h ġ z ṛ ṛh f ẏ. When off, the nukta is ignored (क़ → k).
-  In IAST mode, ड़ also becomes ṛ (same as ऋ), so on the way back ṛ always becomes ऋ. ISO 15919 has no such clash.
+Left-click the tray icon (or right-click → **Settings…**).
+
+- **Standard**: IAST or ISO 15919
+
+  | Devanagari | IAST | ISO 15919 |
+  | --- | --- | --- |
+  | संस्कृतम् | saṃskṛtam | saṁskr̥tam |
+  | कृष्ण | kṛṣṇa | kr̥ṣṇa |
+  | देवो | devo | dēvō |
+  | ॐ नमः शिवाय | oṃ namaḥ śivāya | ōṁ namaḥ śivāya |
+
+- **Nukta letters** (for Hindi): क़ ख़ ग़ ज़ ड़ ढ़ फ़ → q k͟h ġ z ṛ ṛh f. When off, the dot is ignored, as usual in Sanskrit (क़ → k).
 - **Convert digits**: १२३ ⇄ 123
-- **Read selection via UI Automation**: reads the selection without the clipboard in apps that support it
-  (Word, Outlook, Notepad, most browsers); falls back to Ctrl+C otherwise.
-- **Insert by pasting or typing**: pasting is fast and the clipboard is restored afterwards; typing never touches
-  the clipboard, but Word's AutoCorrect may change the text.
-- **Start at sign-in**, **check for updates at startup**
+- **Alongside format**: संस्कृतम् (saṃskṛtam), संस्कृतम् [saṃskṛtam], संस्कृतम् / saṃskṛtam, on a new line, or your own.
+- **Try it**: type or paste text to see the result before using it.
 
-## Prerequisites (one-time, Windows 11)
+Transliteration follows Sanskrit conventions: the inherent *a* is always written (राम → rāma),
+and daṇḍas become | and ||.
 
-1. **Rust**: <https://rustup.rs> (installs `cargo`). Check with `cargo --version`.
-2. **Microsoft C++ Build Tools**: <https://visualstudio.microsoft.com/visual-cpp-build-tools/>,
-   choose the workload **"Desktop development with C++"**.
-3. **Node.js LTS**: <https://nodejs.org> (only used for the Tauri command-line tool).
-4. WebView2 is already part of Windows 11.
+## Updates
 
-## Run and build
+Sanscribe checks for a new version when it starts and asks before installing it.
+You can also check any time: right-click the tray icon → **Check for updates**.
 
-```powershell
-cd D:\git\app-sanscribe
+## Good to know
 
-# development (debug build, with console log)
-powershell -ExecutionPolicy Bypass -File .\dev.ps1
+- **Privacy:** everything happens on your computer. The only internet access is the update check.
+- **Clipboard:** where an application doesn't let Sanscribe read the selection directly, it briefly
+  uses the clipboard. Your clipboard is restored afterwards, and Sanscribe's own entries don't
+  appear in the clipboard history (Win + V).
+- **Select first:** some editors (e.g. VS Code) copy the whole line when nothing is selected.
+- **Programs running as administrator** can't be controlled by normal programs, so Sanscribe
+  doesn't work in them.
+- In a few applications the result can't be re-selected automatically after a Devanagari
+  conversion. Select it again by hand to convert it back.
+- Nothing happens / a short sound? Nothing was selected, or the selection had nothing to convert.
 
-# installer
-powershell -ExecutionPolicy Bypass -File .\build.ps1
-```
+## Uninstall
 
-The first build takes several minutes. The installer ends up in
-`src-tauri\target\release\bundle\nsis\Sanscribe_0.1.0_x64-setup.exe`; it installs per user
-and needs no admin rights.
+Windows **Settings → Apps → Installed apps → Sanscribe → Uninstall**.
 
-Engine tests only: `cargo test --manifest-path core/Cargo.toml`
+## Feedback
 
-## Releases and updates
+Found a wrong transliteration or a program where it doesn't work?
+[Open an issue](https://github.com/rorugi/sanscribe/issues) with the text and the program you used.
 
-Installed copies check
-`https://github.com/rorugi/sanscribe/releases/latest/download/latest.json`
-at startup (and via the tray menu). If a newer version is published, they offer to install it.
+---
 
-To publish a new version:
-
-```powershell
-.\release.ps1 0.2.0
-```
-
-This sets the version, commits, tags `v0.2.0` and pushes. GitHub Actions then builds and
-signs the installer and creates a **draft** release containing the installer, its signature
-and `latest.json`. Download and test it, then press **Publish release** on GitHub.
-Installed copies only see an update once the release is published.
-
-One-time setup: the release workflow needs two repository secrets
-(GitHub → Settings → Secrets and variables → Actions):
-
-| Secret | Value |
-| --- | --- |
-| `TAURI_SIGNING_PRIVATE_KEY` | contents of `.secrets\sanscribe-updater.key` |
-| `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | contents of `.secrets\sanscribe-updater.key.password` |
-
-**Back up the `.secrets` folder.** It is not in git. Without the key and its password you
-can't publish updates that existing installations will accept.
-
-Every push to `main` is also built and tested on Windows by the CI workflow.
-
-## Project layout
-
-```
-core/            transliteration engine (pure Rust, unit-tested)
-src-tauri/       the app: hotkeys, selection/clipboard, tray, settings, updater
-  src/win/       Windows integration (UI Automation, clipboard, SendInput)
-ui/              settings window (HTML/CSS/JS)
-```
-
-## Known limitations
-
-- Apps running **as administrator** can't receive input from a normal app (Windows security).
-- If an app doesn't support UI Automation, Sanscribe uses Ctrl+C. Some editors (e.g. VS Code)
-  copy the whole line when nothing is selected, so select text before pressing the hotkey.
-- After a toggle, the result is re-selected via UI Automation. Where that isn't available, it
-  falls back to Shift+← for Latin results only, so in such apps re-select Devanagari results by hand.
-- Vedic accent marks are passed through unchanged.
-- macOS support comes later (the engine and settings are already cross-platform).
+Developers: building, testing and releasing are described in [DEVELOPMENT.md](DEVELOPMENT.md).

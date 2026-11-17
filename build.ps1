@@ -5,7 +5,7 @@ Set-Location $PSScriptRoot
 
 foreach ($cmd in "cargo", "npm") {
     if (-not (Get-Command $cmd -ErrorAction SilentlyContinue)) {
-        throw "'$cmd' was not found. See README.md -> Prerequisites."
+        throw "'$cmd' was not found. See DEVELOPMENT.md -> Prerequisites."
     }
 }
 
