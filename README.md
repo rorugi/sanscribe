@@ -89,6 +89,16 @@ Windows **Settings → Apps → Installed apps → Sanscribe → Uninstall**.
 Found a wrong transliteration or a program where it doesn't work?
 [Open an issue](https://github.com/rorugi/sanscribe/issues) with the text and the program you used.
 
+## Acknowledgements
+
+Inspired by [SansTrans](https://t-kintaert.github.io/sanstrans/) by Thomas Kintaert
+(Institut für Südasien-, Tibet- und Buddhismuskunde, Universität Wien), a free Windows tool
+for typing and converting Sanskrit transliteration. Thank you!
+
+## License
+
+Sanscribe is free software under the [MIT License](LICENSE).
+
 ---
 
 Developers: building, testing and releasing are described in [DEVELOPMENT.md](DEVELOPMENT.md).

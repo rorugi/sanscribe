@@ -3,6 +3,7 @@ name = "sanscribe"
 version = "0.2.0"
 description = "Devanagari ↔ IAST transliteration with a global hotkey"
 edition = "2021"
+license = "MIT"
 rust-version = "1.80"
 
 [lib]
