@@ -8,11 +8,10 @@ use tauri_plugin_updater::UpdaterExt;
 /// `interactive`: the user asked explicitly, so also report "up to date" and errors.
 pub fn check(app: AppHandle, interactive: bool) {
     tauri::async_runtime::spawn(async move {
-        let result = async {
-            let updater = app.updater().map_err(|e| e.to_string())?;
-            updater.check().await.map_err(|e| e.to_string())
-        }
-        .await;
+        let result = match app.updater() {
+            Ok(updater) => updater.check().await,
+            Err(e) => Err(e),
+        };
 
         match result {
             Ok(Some(update)) => {
@@ -45,7 +44,21 @@ pub fn check(app: AppHandle, interactive: bool) {
             }
             Ok(None) => {
                 if interactive {
-                    app.dialog().message("Sanscribe is up to date.").title("Sanscribe").show(|_| {});
+                    let msg = format!("Sanscribe {} is up to date.", app.package_info().version);
+                    app.dialog().message(msg).title("Sanscribe").show(|_| {});
+                }
+            }
+            Err(tauri_plugin_updater::Error::ReleaseNotFound) => {
+                // No published release on GitHub yet, or no internet connection.
+                log::info!("update check: no release information reachable");
+                if interactive {
+                    let msg = format!(
+                        "No update information is available right now.\n\n\
+                         Either no newer version has been published yet, or there is no internet connection.\n\n\
+                         Installed version: {}",
+                        app.package_info().version
+                    );
+                    app.dialog().message(msg).title("Sanscribe").show(|_| {});
                 }
             }
             Err(e) => {

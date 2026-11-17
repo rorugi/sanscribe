@@ -15,6 +15,9 @@ $Version = $Version.TrimStart("v")
 if ($Version -notmatch '^\d+\.\d+\.\d+$') { throw "Version must look like 1.2.3" }
 
 if (git status --porcelain) { throw "Commit or discard your changes first (git status)." }
+# GitHub updates the README download link after each release; get that first.
+git pull --ff-only --quiet
+if ($LASTEXITCODE -ne 0) { throw "git pull failed." }
 git fetch --tags --quiet
 if (git tag --list "v$Version") { throw "Tag v$Version already exists." }
 

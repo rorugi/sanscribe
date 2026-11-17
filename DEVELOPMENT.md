@@ -49,6 +49,9 @@ creates a **draft** release containing the installer, its signature and `latest.
 Download and test it, then press **Publish release** on GitHub. Installed copies only see
 an update once the release is published.
 
+When you publish a release, the workflow `readme-link.yml` points the README's download
+button at the new installer and commits that to `main` (`release.ps1` pulls it before the next release).
+
 Version numbers: `0.2.1` for fixes, `0.3.0` for new features, `1.0.0` for the first stable
 version. A new version must be higher than the previous one.
 
