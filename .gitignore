@@ -3,3 +3,4 @@ target/
 src-tauri/gen/
 .secrets/
 *.log
+core/Cargo.lock
