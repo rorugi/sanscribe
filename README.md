@@ -10,7 +10,7 @@ your browser, Notepad and most other programs. It runs completely offline.
 
 ## Download
 
-### [⬇ Download Sanscribe 0.2.0 for Windows](https://github.com/rorugi/sanscribe/releases/download/v0.2.0/Sanscribe_0.2.0_x64-setup.exe)
+### [⬇ Download Sanscribe 0.2.1 for Windows](https://github.com/rorugi/sanscribe/releases/download/v0.2.1/Sanscribe_0.2.1_x64-setup.exe)
 
 Windows 10 or 11 (64-bit) · free · [what's new and older versions](https://github.com/rorugi/sanscribe/releases)
 
