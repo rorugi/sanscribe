@@ -22,6 +22,8 @@ pub struct Settings {
     pub hotkey_toggle: String,
     pub hotkey_alongside: String,
     pub alongside_template: String,
+    /// AltGr dead keys for typing diacritics (ā ṛ ṅ ś ñ …).
+    pub diacritic_keys: bool,
     pub read_selection_via_ui_automation: bool,
     pub output_method: OutputMethod,
     pub reselect_after_replace: bool,
@@ -37,6 +39,7 @@ impl Default for Settings {
             hotkey_toggle: "Ctrl+Shift+Alt+T".into(),
             hotkey_alongside: "Ctrl+Shift+Alt+A".into(),
             alongside_template: "{original} ({result})".into(),
+            diacritic_keys: false,
             read_selection_via_ui_automation: true,
             output_method: OutputMethod::Paste,
             reselect_after_replace: true,

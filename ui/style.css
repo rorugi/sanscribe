@@ -99,3 +99,11 @@ button {
 button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 button.link { border: none; background: none; color: var(--accent); padding: 4px 0; text-decoration: underline; }
 .hidden { display: none; }
+
+table.keys { border-collapse: collapse; margin: 6px 0 4px 26px; }
+table.keys td { padding: 3px 14px 3px 0; }
+table.keys td:last-child { font-size: 16px; letter-spacing: .08em; }
+kbd {
+  font: 12px "Segoe UI", sans-serif; padding: 1px 6px; border-radius: 4px;
+  border: 1px solid var(--border); border-bottom-width: 2px; background: var(--bg);
+}

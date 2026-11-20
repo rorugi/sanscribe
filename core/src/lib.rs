@@ -4,6 +4,7 @@
 //! no Hindi schwa deletion). It is pure Rust with no OS dependencies so it
 //! can be unit-tested on any platform.
 
+mod compose;
 mod deva_to_latin;
 mod latin_to_deva;
 mod session;
@@ -11,6 +12,7 @@ mod tables;
 
 use serde::{Deserialize, Serialize};
 
+pub use compose::{compose, Mark};
 pub use deva_to_latin::to_latin;
 pub use latin_to_deva::to_devanagari;
 pub use session::Session;

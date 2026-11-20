@@ -91,6 +91,15 @@ ui/              settings window (HTML/CSS/JS, no build step)
 6. Restore the saved clipboard. Clipboard writes are flagged so that Windows clipboard history
    and cloud clipboard ignore them.
 
+## Diacritic keys
+
+`src-tauri/src/win/deadkeys.rs` installs a low-level keyboard hook (`WH_KEYBOARD_LL`) on its
+own thread while the setting is on. AltGr (or Ctrl+Alt) with `.` `-` `,` (± Shift) is
+swallowed and remembered as a mark; the next letter is swallowed too, composed with
+`core::compose` (NFC, so marks can be pressed in any order) and typed as a Unicode key
+event. Injected events are ignored, so the hook never sees its own output. Pending marks
+expire after 5 seconds; Esc cancels; any other key cancels and passes through.
+
 ## Transliteration notes
 
 - Input is NFC-normalised; precomposed nukta letters (U+0958–U+095F) are handled.

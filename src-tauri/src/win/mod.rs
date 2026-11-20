@@ -2,6 +2,7 @@
 //! synthetic keyboard input.
 
 pub mod clipboard;
+pub mod deadkeys;
 pub mod input;
 pub mod uia;
 

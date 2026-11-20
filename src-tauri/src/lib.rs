@@ -63,6 +63,13 @@ fn apply_autostart(app: &AppHandle, enabled: bool) {
     }
 }
 
+fn apply_diacritic_keys(enabled: bool) {
+    #[cfg(windows)]
+    win::deadkeys::set_enabled(enabled);
+    #[cfg(not(windows))]
+    let _ = enabled;
+}
+
 pub fn show_settings(app: &AppHandle) {
     if let Some(w) = app.get_webview_window("main") {
         let _ = w.show();
@@ -92,6 +99,7 @@ fn save_settings(app: AppHandle, state: State<AppState>, settings: Settings) -> 
         return Err(e);
     }
     apply_autostart(&app, settings.launch_at_login);
+    apply_diacritic_keys(settings.diacritic_keys);
     settings::save(&app, &settings)?;
     *state.settings.lock().unwrap() = settings;
     // Options may have changed; cached conversions would no longer match.
@@ -157,6 +165,7 @@ pub fn run() {
                 hotkeys: Mutex::new(HashMap::new()),
             });
             tray::create(&handle)?;
+            apply_diacritic_keys(settings.diacritic_keys);
             if let Err(e) = register_hotkeys(&handle, &settings) {
                 log::error!("{e}");
                 show_settings(&handle);

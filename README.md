@@ -42,6 +42,24 @@ contains any Devanagari, the Devanagari is converted and other text is left as i
 
 You can change both hotkeys in the settings.
 
+## Typing diacritics
+
+Turn on **Diacritic keys** in the settings to type IAST letters directly in any application.
+Press the key combination first, then the letter:
+
+| Keys | Mark | Letters |
+| --- | --- | --- |
+| **AltGr + .** | dot below | ṛ ṭ ḍ ṇ ṣ ṃ ḥ ḷ |
+| **AltGr + Shift + .** | dot above | ṅ ṁ |
+| **AltGr + -** | line above | ā ī ū |
+| **AltGr + Shift + -** | line below | ḻ ṉ ṟ |
+| **AltGr + ,** | acute | ś |
+| **AltGr + Shift + ,** | tilde | ñ |
+
+Example: **AltGr + -**, then **a** → ā. For **ṝ** and **ḹ** press both marks before the letter:
+**AltGr + .**, **AltGr + -**, then **r**. Shift + letter gives capitals (Ā). **Esc** cancels.
+Keyboards without AltGr can use **Ctrl + Alt** instead.
+
 ## Settings
 
 Left-click the tray icon (or right-click → **Settings…**).
@@ -57,6 +75,7 @@ Left-click the tray icon (or right-click → **Settings…**).
 
 - **Nukta letters** (for Hindi): क़ ख़ ग़ ज़ ड़ ढ़ फ़ → q k͟h ġ z ṛ ṛh f. When off, the dot is ignored, as usual in Sanskrit (क़ → k).
 - **Convert digits**: १२३ ⇄ 123
+- **Diacritic keys**: see [Typing diacritics](#typing-diacritics) (off by default)
 - **Alongside format**: संस्कृतम् (saṃskṛtam), संस्कृतम् [saṃskṛtam], संस्कृतम् / saṃskṛtam, on a new line, or your own.
 - **Try it**: type or paste text to see the result before using it.
 

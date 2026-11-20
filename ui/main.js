@@ -3,6 +3,7 @@ const { invoke } = window.__TAURI__.core;
 
 const $ = (id) => document.getElementById(id);
 const checkboxes = [
+  "diacriticKeys",
   "readSelectionViaUiAutomation",
   "reselectAfterReplace",
   "restoreClipboard",

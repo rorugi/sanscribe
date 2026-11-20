@@ -65,6 +65,20 @@
     </section>
 
     <section>
+      <h2>Diacritic keys</h2>
+      <label class="check"><input type="checkbox" id="diacriticKeys" /> Type diacritics in any application: press the key combination, then the letter</label>
+      <table class="keys">
+        <tr><td><kbd>AltGr</kbd> + <kbd>.</kbd></td><td>dot below</td><td>ṛ ṭ ḍ ṇ ṣ ṃ ḥ ḷ</td></tr>
+        <tr><td><kbd>AltGr</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd></td><td>dot above</td><td>ṅ ṁ</td></tr>
+        <tr><td><kbd>AltGr</kbd> + <kbd>-</kbd></td><td>line above</td><td>ā ī ū</td></tr>
+        <tr><td><kbd>AltGr</kbd> + <kbd>Shift</kbd> + <kbd>-</kbd></td><td>line below</td><td>ḻ ṉ ṟ</td></tr>
+        <tr><td><kbd>AltGr</kbd> + <kbd>,</kbd></td><td>acute</td><td>ś</td></tr>
+        <tr><td><kbd>AltGr</kbd> + <kbd>Shift</kbd> + <kbd>,</kbd></td><td>tilde</td><td>ñ</td></tr>
+      </table>
+      <p class="hint">Example: <kbd>AltGr</kbd>+<kbd>-</kbd> then <kbd>a</kbd> → ā. For ṝ and ḹ press both marks: <kbd>AltGr</kbd>+<kbd>.</kbd>, <kbd>AltGr</kbd>+<kbd>-</kbd>, then <kbd>r</kbd>. Shift + letter gives capitals (Ā). <kbd>Esc</kbd> cancels. Without an AltGr key, Ctrl+Alt works the same way. Save, then try it in the box above.</p>
+    </section>
+
+    <section>
       <h2>Behaviour</h2>
       <label class="check"><input type="checkbox" id="readSelectionViaUiAutomation" /> Read the selection directly (UI Automation) where the app supports it, without using the clipboard</label>
       <label class="check"><input type="checkbox" id="reselectAfterReplace" /> Keep the result selected, so pressing the toggle hotkey again converts it back</label>
