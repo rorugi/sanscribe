@@ -1,10 +1,8 @@
-# Tests and builds Sanscribe on Windows for every push and pull request.
+# Tests and builds Sanscribe on Windows. Manual only (Actions → CI → Run workflow):
+# releases are built locally with release.ps1, nothing runs automatically on GitHub.
 name: CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
   workflow_dispatch:
 
 jobs:

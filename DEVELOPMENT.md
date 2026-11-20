@@ -32,42 +32,32 @@ Logs: `%LOCALAPPDATA%\com.sanscribe.app\logs\` (also printed to the console in d
 
 ## Releases and updates
 
-Installed copies check
-`https://github.com/rorugi/sanscribe/releases/latest/download/latest.json`
-at startup and via the tray menu. If a newer version is published, they offer to install it.
-
-To publish a new version:
+Everything is built on your PC; nothing runs automatically on GitHub.
 
 ```powershell
-.\release.ps1 0.3.0
+.\release.ps1 0.3.0 -Notes "Diacritic keys"
 ```
 
-This checks that everything is committed, sets the version in `tauri.conf.json`,
-`src-tauri/Cargo.toml` and `package.json`, commits, tags `v0.3.0` and pushes.
-GitHub Actions (`.github/workflows/release.yml`) then builds and signs the installer and
-creates a **draft** release containing the installer, its signature and `latest.json`.
-Download and test it, then press **Publish release** on GitHub. Installed copies only see
-an update once the release is published.
+The script
+1. checks that everything is committed and pulls,
+2. sets the version in `tauri.conf.json`, `src-tauri/Cargo.toml`, `package.json` and the README download link,
+3. runs `build.ps1` (engine tests, build, signing),
+4. writes `release\v0.3.0\` with the installer, its `.sig` and `latest.json`,
+5. commits, tags `v0.3.0` and pushes,
+6. opens GitHub's "new release" page for that tag and the `release\v0.3.0` folder.
 
-When you publish a release, the workflow `readme-link.yml` points the README's download
-button at the new installer and commits that to `main` (`release.ps1` pulls it before the next release).
+Drag the three files into the release page and press **Publish release**. Installed copies
+check `https://github.com/rorugi/sanscribe/releases/latest/download/latest.json` and offer the
+update from then on. If the build fails, the version change is undone.
 
 Version numbers: `0.2.1` for fixes, `0.3.0` for new features, `1.0.0` for the first stable
 version. A new version must be higher than the previous one.
 
-One-time setup: the release workflow needs two repository secrets
-(repository → Settings → Secrets and variables → Actions):
-
-| Secret | Value |
-| --- | --- |
-| `TAURI_SIGNING_PRIVATE_KEY` | contents of `.secrets\sanscribe-updater.key` |
-| `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | contents of `.secrets\sanscribe-updater.key.password` |
-
 **Back up the `.secrets` folder.** It is not in git. Without the key and its password you
 can't publish updates that existing installations will accept.
 
-Every push to `main` is built and tested on Windows by the CI workflow (`ci.yml`),
-including `cargo clippy -D warnings`.
+The CI workflow (`ci.yml`: tests, `clippy -D warnings`, debug build on Windows) only runs when
+started by hand under Actions → CI → Run workflow.
 
 ## Project layout
 

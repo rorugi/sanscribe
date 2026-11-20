@@ -1,5 +1,7 @@
 # Builds the Sanscribe Windows installer (NSIS, per-user, no admin rights needed).
 # Usage:  powershell -ExecutionPolicy Bypass -File .\build.ps1
+#         -NoOpen: don't open the output folder (used by release.ps1)
+param([switch]$NoOpen)
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
@@ -32,4 +34,4 @@ if ($LASTEXITCODE -ne 0) { throw "Build failed." }
 $out = Join-Path $PSScriptRoot "src-tauri\target\release\bundle\nsis"
 Write-Host "`nDone. Installer:" -ForegroundColor Green
 Get-ChildItem $out -Filter *.exe | ForEach-Object { Write-Host "  $($_.FullName)" }
-Invoke-Item $out
+if (-not $NoOpen) { Invoke-Item $out }
